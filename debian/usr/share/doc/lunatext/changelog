@@ -1,0 +1,15 @@
+lunatext (0.1.11) stable; urgency=medium
+
+  * MIME-Korrektur für leere Dateien: application/x-zerosize ergänzt.
+  * Bestehende MIME-Zuordnungen unverändert beibehalten.
+
+ -- LunaText <noreply@localhost>  Sat, 14 Nov 2026 04:50:00 +0100
+
+## 0.1.11
+- Desktop-Eintrag für die Erkennung in „Öffnen mit“ überarbeitet.
+- Desktop-Datenbank wird bei Installation und Entfernung ausdrücklich aktualisiert und der Desktop-Umgebung gemeldet.
+- Kategorien des Desktop-Eintrags bereinigt.
+- Versionsanzeige in der Anwendung auf 0.1.11 korrigiert.
+
+## 0.1.10
+- Desktop-Starter und MIME-Zuordnungen ergänzt.

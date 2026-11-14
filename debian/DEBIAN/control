@@ -1,0 +1,9 @@
+Package: lunatext
+Version: 0.1.11
+Section: editors
+Priority: optional
+Architecture: all
+Depends: python3, python3-pyside6.qtwidgets, python3-pyside6.qtnetwork, desktop-file-utils
+Maintainer: Goldisoft
+Description: Qt6 text editor
+ LunaText is a tabbed Qt6 text editor with search, replace, themes and settings.

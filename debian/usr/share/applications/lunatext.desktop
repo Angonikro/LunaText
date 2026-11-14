@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=LunaText
+GenericName=Text Editor
+GenericName[de]=Texteditor
+Comment=Qt6 Text Editor
+Comment[de]=Qt6-Texteditor
+Exec=/usr/bin/lunatext %F
+TryExec=/usr/bin/lunatext
+Icon=lunatext
+Terminal=false
+StartupNotify=true
+Categories=Utility;TextEditor;
+MimeType=text/plain;text/markdown;text/x-markdown;text/x-python;text/x-python3;text/x-shellscript;text/x-sh;application/x-shellscript;application/x-sh;application/x-shell;application/x-csh;text/x-csh;text/x-csrc;text/x-chdr;text/x-c++src;text/x-c++hdr;text/x-java;text/x-log;text/csv;text/xml;application/xml;application/json;text/html;application/xhtml+xml;text/css;text/javascript;application/javascript;application/x-javascript;text/x-yaml;application/yaml;text/yaml;application/toml;application/x-toml;text/x-ini;application/x-ini;text/x-config;text/x-sql;application/sql;text/x-sql;text/x-perl;text/x-ruby;text/x-rust;text/x-php;text/x-diff;text/x-patch;text/x-rst;text/x-tex;text/x-makefile;text/x-cmake;text/x-desktop;application/x-desktop;application/x-zerosize;

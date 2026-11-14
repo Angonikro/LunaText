@@ -1,0 +1,42 @@
+#!/bin/sh
+set -e
+
+APP_ID="lunatext.desktop"
+DESKTOP_FILE="/usr/share/applications/$APP_ID"
+
+# Refresh desktop metadata.
+if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database /usr/share/applications || true
+fi
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+    gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor || true
+fi
+if command -v dpkg-trigger >/dev/null 2>&1; then
+    dpkg-trigger --no-await /usr/share/applications || true
+fi
+
+# Set LunaText as the default handler for every MIME type advertised by its
+# desktop entry. Run xdg-mime as the desktop user, never as root.
+TARGET_USER="${SUDO_USER:-}"
+if [ -z "$TARGET_USER" ] && [ -n "${PKEXEC_UID:-}" ]; then
+    TARGET_USER="$(getent passwd "$PKEXEC_UID" | cut -d: -f1)"
+fi
+if [ -z "$TARGET_USER" ] || [ "$TARGET_USER" = root ]; then
+    TARGET_USER="$(logname 2>/dev/null || true)"
+fi
+if [ -z "$TARGET_USER" ] || [ "$TARGET_USER" = root ]; then
+    TARGET_USER="$(who 2>/dev/null | awk 'NR==1 {print $1}')"
+fi
+
+if [ -n "$TARGET_USER" ] && [ "$TARGET_USER" != root ] && id "$TARGET_USER" >/dev/null 2>&1; then
+    TARGET_HOME="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
+    if [ -n "$TARGET_HOME" ] && [ -x "$(command -v xdg-mime 2>/dev/null || true)" ]; then
+        # Parse the MimeType key without depending on desktop-specific tools.
+        MIME_LIST="$(sed -n 's/^MimeType=//p' "$DESKTOP_FILE" | head -n 1 | tr ';' ' ')"
+        for MIME in $MIME_LIST; do
+            runuser -u "$TARGET_USER" -- env HOME="$TARGET_HOME"                 XDG_CONFIG_HOME="$TARGET_HOME/.config"                 xdg-mime default "$APP_ID" "$MIME" >/dev/null 2>&1 || true
+        done
+    fi
+fi
+
+exit 0
