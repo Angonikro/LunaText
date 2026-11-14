@@ -4,6 +4,10 @@
 PySide6. Diese Ausgabe ist für Debian 13 (Trixie) und Systeme wie den
 Raspberry Pi mit ARM64 ausgelegt.
 
+![LunaText](lunatext.png)
+
+[Github Seite](https://github.com/Angonikro/LunaText/)
+
 ## Inhalt
 
 - [Funktionen](#funktionen)
